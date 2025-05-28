@@ -21,6 +21,7 @@ from braket.circuits.noise_model import (
     CircuitInstructionCriteria,
     Criteria,
     GateCriteria,
+    MeasureCriteria,
     NoiseModel,
     ObservableCriteria,
     QubitInitializationCriteria,
@@ -462,6 +463,14 @@ def test_apply_initialization_noise(noise_model, input_circuit, expected_circuit
 def test_apply_readout_noise(noise_model, input_circuit, expected_circuit):
     result_circuit = noise_model.apply(input_circuit)
     assert result_circuit == expected_circuit
+
+
+def test_apply_measure_readout_noise():
+    noise_model = NoiseModel().add_noise(BitFlip(0.1), MeasureCriteria([0]))
+    circuit = Circuit().x(0).x(1).measure(0)
+    noisy = noise_model.apply(circuit)
+    expected = Circuit().x(0).x(1).bit_flip(0, probability=0.1).measure(0)
+    assert noisy == expected
 
 
 @pytest.mark.xfail(raises=IndexError)

@@ -26,6 +26,7 @@ from braket.circuits.noise_model.noise_model import (
     NoiseModelInstruction,  # noqa: F401
 )
 from braket.circuits.noise_model.observable_criteria import ObservableCriteria  # noqa: F401
+from braket.circuits.noise_model.measure_criteria import MeasureCriteria  # noqa: F401
 from braket.circuits.noise_model.qubit_initialization_criteria import (
     QubitInitializationCriteria,  # noqa: F401
 )
